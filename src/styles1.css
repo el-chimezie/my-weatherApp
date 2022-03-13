@@ -11,6 +11,14 @@
   margin-left: -10px;
 }
 
+.main_temp .img {
+  margin-left: -23px;
+}
+
+.main_temp .main_deg {
+  margin-left: -15px;
+}
+
 .day_one,
 .day_two,
 .day_three,
