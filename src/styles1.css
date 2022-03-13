@@ -13,10 +13,21 @@
 
 .main_temp .img {
   margin-left: -23px;
+  width: 80px;
 }
 
 .main_temp .main_deg {
   margin-left: -15px;
+}
+
+.main_temp .active {
+  color: black;
+  cursor: default;
+}
+
+.main_temp .active :hover {
+  color: black;
+  cursor: default;
 }
 
 .day_one,

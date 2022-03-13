@@ -20,10 +20,10 @@ let currentDay = document.querySelector("#current-day");
 currentDay.innerHTML = `${sentence}`;
 
 function showResult(response) {
+  celTemp = response.data.main.temp;
+
   document.querySelector("#main-city").innerHTML = response.data.name;
-  document.querySelector("#degree-id").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  document.querySelector("#degree-id").innerHTML = Math.round(celTemp);
   document.querySelector("#hum-id").innerHTML = response.data.main.humidity;
   document.querySelector("#wind-id").innerHTML = Math.round(
     response.data.wind.speed
@@ -70,4 +70,28 @@ function searchCurrentLocation(position) {
 let currentButton = document.querySelector("#current-box");
 currentButton.addEventListener("click", currentCity);
 
+function showFah(event) {
+  event.preventDefault();
+  let fahTemp = (celTemp * 9) / 5 + 32;
+  let tempElement = document.querySelector("#degree-id");
+  tempElement.innerHTML = Math.round(fahTemp);
+  cellink.classList.remove("active");
+  fahlink.classList.add("active");
+}
+
+function showCel(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#degree-id");
+  tempElement.innerHTML = Math.round(celTemp);
+  cellink.classList.add("active");
+  fahlink.classList.remove("active");
+}
+
+let fahlink = document.querySelector("#fah");
+fahlink.addEventListener("click", showFah);
+
+let cellink = document.querySelector("#cel");
+cellink.addEventListener("click", showCel);
+
+let celTemp = null;
 search("London");
