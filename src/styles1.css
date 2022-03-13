@@ -1,8 +1,16 @@
 .city,
 .main_temp {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
 }
+
+.main_temp .units {
+  position: relative;
+  font-size: 16px;
+  top: -20px;
+  margin-left: -10px;
+}
+
 .day_one,
 .day_two,
 .day_three,
