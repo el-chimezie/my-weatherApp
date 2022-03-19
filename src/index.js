@@ -19,6 +19,25 @@ let sentence = `${day} ${hour}:${min} minutes`;
 let currentDay = document.querySelector("#current-day");
 currentDay.innerHTML = `${sentence}`;
 
+function displayForcast() {
+  let forcastElement = document.querySelector(`#forcast`);
+  let forcastHTML = `<div class="row">`;
+  let days = ["Sat", "Sun", "Mon", "Tue"];
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      `
+        <div class="col-1 day_one">
+         ${day}
+          <div class="galax_one">⛅</div>
+          <div>31°</div>
+        </div>`;
+  });
+
+  forcastHTML = forcastHTML + `</div>`;
+  forcastElement.innerHTML = forcastHTML;
+}
+
 function showResult(response) {
   celTemp = response.data.main.temp;
 
@@ -95,3 +114,4 @@ cellink.addEventListener("click", showCel);
 
 let celTemp = null;
 search("London");
+displayForcast();
