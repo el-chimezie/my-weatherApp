@@ -19,7 +19,7 @@ let sentence = `${day} ${hour}:${min} minutes`;
 let currentDay = document.querySelector("#current-day");
 currentDay.innerHTML = `${sentence}`;
 
-function displayForcast() {
+function displayForcast(response) {
   let forcastElement = document.querySelector(`#forcast`);
   let forcastHTML = `<div class="row">`;
   let days = ["Sat", "Sun", "Mon", "Tue"];
@@ -36,6 +36,12 @@ function displayForcast() {
 
   forcastHTML = forcastHTML + `</div>`;
   forcastElement.innerHTML = forcastHTML;
+}
+
+function getForcast(coordinates) {
+  let apiKey = "50fb3754982e6e5aa21c3fc297db7f5d";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForcast);
 }
 
 function showResult(response) {
@@ -55,6 +61,8 @@ function showResult(response) {
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
+
+  getForcast(response.data.coord);
 }
 
 function search(city) {
@@ -114,4 +122,3 @@ cellink.addEventListener("click", showCel);
 
 let celTemp = null;
 search("London");
-displayForcast();
