@@ -19,19 +19,36 @@ let sentence = `${day} ${hour}:${min} minutes`;
 let currentDay = document.querySelector("#current-day");
 currentDay.innerHTML = `${sentence}`;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForcast(response) {
+  let forcast = response.data.daily;
   let forcastElement = document.querySelector(`#forcast`);
   let forcastHTML = `<div class="row">`;
-  let days = ["Sat", "Sun", "Mon", "Tue"];
-  days.forEach(function (day) {
-    forcastHTML =
-      forcastHTML +
-      `
+
+  forcast.forEach(function (forcastDay, index) {
+    if (index < 6) {
+      forcastHTML =
+        forcastHTML +
+        `
         <div class="col-1 day_one">
-         ${day}
-          <div class="galax_one">⛅</div>
-          <div>31°</div>
+          <div class="galax_one">${formatDay(forcastDay.dt)}</div>
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forcastDay.weather[0].icon
+          }@2x.png" width="40px"/>
+          
+          <div>${Math.round(forcastDay.temp.max)}° <span>${Math.round(
+          forcastDay.temp.min
+        )}°</span></div>
         </div>`;
+    }
   });
 
   forcastHTML = forcastHTML + `</div>`;

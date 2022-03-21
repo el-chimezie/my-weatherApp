@@ -52,3 +52,8 @@ a {
 a:hover {
   text-decoration: active;
 }
+
+.boarder-link {
+  font-size: 12px;
+  padding-top: 20px;
+}
